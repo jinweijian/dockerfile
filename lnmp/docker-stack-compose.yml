@@ -10,7 +10,6 @@ services:
       - "9000:9000"
     volumes:
       - /data/website:/data/website
-
   nginx:
     image: nginx
     ports:
@@ -43,7 +42,6 @@ services:
       - ./data/redis/data:/data
       - ./conf/redis/redis.conf:/etc/redis.conf
     # restart: always
-volumes:
 
 
 
