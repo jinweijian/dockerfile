@@ -1,0 +1,49 @@
+version: '3.3'
+services:
+  php7:
+    image: php7:redis+swoole
+
+    build:
+      context: /data/lnmp
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    volumes:
+      - /data/website:/data/website
+
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./conf/nginx/conf.d:/etc/nginx/conf.d
+      - ./conf/nginx/fastcgi.conf:/etc/nginx/fastcgi.conf
+      - ./logs/nginx/error.log:/var/log/nginx/error.log
+      - ./logs/nginx/access.log:/var/log/nginx/access.log
+      - /data/website:/data/website
+    depends_on:
+      - php7
+
+  mysql5.6:
+    image: mysql:5.6
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+    # restart: always
+    volumes:
+      - ./conf/mysql5.6/conf.d:/etc/mysql/conf.d
+      - ./data/mysql5.6/data:/var/lib/mysql
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./data/redis/data:/data
+      - ./conf/redis/redis.conf:/etc/redis.conf
+    # restart: always
+volumes:
+
+
+

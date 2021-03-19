@@ -1,0 +1,6 @@
+cluster.name: "docker-cluster"
+network.host: 0.0.0.0
+bootstrap.system_call_filter: false
+node.name: node-1
+cluster.initial_master_nodes: ["node-1"]
+

@@ -1,0 +1,30 @@
+version: '3'
+services:
+  elasticsearch:
+    image: elasticsearch:7.10.1
+    container_name: elasticsearch-serve
+    ports:
+      - 9200:9200
+      - 9300:9300
+    volumes:
+      - ./conf/elasticsearch.yml:/config/elasticsearch.yml
+      - ./data:/data
+      - ./plugins:/plugins
+      - ./backup:/backup
+
+    environment:
+      ES_JAVA_OPTS: "-Xmx512m -Xms512m"
+      TAKE_FILE_OWNERSHIP: 10
+      discovery.type: 'single-node'
+
+  kibana:
+    image: kibana:7.10.1
+    container_name: kibana-serve
+    ports:
+      - 5601:5601
+    volumes:
+      - ./conf/kibana.yml:/usr/share/kibana/config/kibana.yml
+    depends_on:
+      - elasticsearch
+
+

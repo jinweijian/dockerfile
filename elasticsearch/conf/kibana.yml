@@ -1,0 +1,7 @@
+server.name: kibana
+server.host: "0"
+elasticsearch.hosts: ["http://elasticsearch-serve:9200"]
+xpack.monitoring.ui.container.elasticsearch.enabled: true
+elasticsearch.username: "elastic"
+elasticsearch.password: "jingege@123"
+elasticsearch.requestTimeout: 60000
