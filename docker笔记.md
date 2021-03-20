@@ -441,9 +441,9 @@ Compose和Docker兼容性：
         credential_spec       # 不知道怎么用
 
         deploy                # v3 版本以上, 指定与部署和运行服务相关的配置, deploy 部分是 docker stack 使用的, docker stack 依赖 docker swarm
-            endpoint_mode         # v3.3 版本中新增的功能, 指定服务暴露的方式
-                vip                   # Docker 为该服务分配了一个虚拟 IP(VIP), 作为客户端的访问服务的地址
-                dnsrr                 # DNS轮询, Docker 为该服务设置 DNS 条目, 使得服务名称的 DNS 查询返回一个 IP 地址列表, 客户端直接访问其中的一个地址
+            endpoint_mode:         # v3.3 版本中新增的功能, 指定服务暴露的方式
+                		{ vip                   # Docker 为该服务分配了一个虚拟 IP(VIP), 作为客户端的访问服务的地址
+                		dnsrr }                # DNS轮询, Docker 为该服务设置 DNS 条目, 使得服务名称的 DNS 查询返回一个 IP 地址列表, 客户端直接访问其中的一个地址
             labels                # 指定服务的标签，这些标签仅在服务上设置
             mode                  # 指定 deploy 的模式
                 global                # 每个集群节点都只有一个容器

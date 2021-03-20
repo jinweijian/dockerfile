@@ -1,15 +1,19 @@
 version: '3.3'
 services:
   php7:
-    image: php7:redis+swoole
-
-    build:
-      context: /data/lnmp
-      dockerfile: Dockerfile
+    image: jinweijian/php:7.2-fpm
+    # build:
+    #  context: /data/lnmp
+    #  dockerfile: Dockerfile
     ports:
       - "9000:9000"
     volumes:
       - /data/website:/data/website
+    networks:
+      - lnmpStack
+    deploy:
+      replicas: 3
+
   nginx:
     image: nginx
     ports:
@@ -22,8 +26,12 @@ services:
       - /data/website:/data/website
     depends_on:
       - php7
+    networks:
+      - lnmpStack
+      deploy:
+        replicas: 3
 
-  mysql5.6:
+  mysql5-6:
     image: mysql:5.6
     ports:
       - "3306:3306"
@@ -33,6 +41,10 @@ services:
     volumes:
       - ./conf/mysql5.6/conf.d:/etc/mysql/conf.d
       - ./data/mysql5.6/data:/var/lib/mysql
+    networks:
+      - lnmpStack
+      deploy:
+        replicas: 3
 
   redis:
     image: redis
@@ -41,7 +53,16 @@ services:
     volumes:
       - ./data/redis/data:/data
       - ./conf/redis/redis.conf:/etc/redis.conf
+    networks:
+      - lnmpStack
+      deploy:
+        replicas: 3
     # restart: always
+networks:
+  lnmpStack:
 
+volumes:
+  mysql:
+  nginx:
 
 
