@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.9'
 services:
   php7:
     image: jinweijian/php:7.2-fpm
@@ -28,8 +28,8 @@ services:
       - php7
     networks:
       - lnmpStack
-      deploy:
-        replicas: 3
+    deploy:
+      replicas: 3
 
   mysql5-6:
     image: mysql:5.6
@@ -43,8 +43,8 @@ services:
       - ./data/mysql5.6/data:/var/lib/mysql
     networks:
       - lnmpStack
-      deploy:
-        replicas: 3
+    deploy:
+      replicas: 3
 
   redis:
     image: redis
@@ -55,8 +55,8 @@ services:
       - ./conf/redis/redis.conf:/etc/redis.conf
     networks:
       - lnmpStack
-      deploy:
-        replicas: 3
+    deploy:
+      replicas: 3
     # restart: always
 networks:
   lnmpStack:
